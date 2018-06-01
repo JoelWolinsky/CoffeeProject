@@ -9,10 +9,13 @@
         margin: 0 auto;
         margin-top:40px;
         padding: 20px;
+        table-layout: fixed;
+
         }
         
 
     .avitar{
+        position: relative;
         border: 3px solid;
         border-color: #18181;
         transition: .5s ease;
@@ -74,9 +77,11 @@
         }
 
     .avitar{
-        border: 3px solid;
-        border-color: #18181;
+        
+        margin: 5px;
         transition: .5s ease;
+        border-style: none;
+        
         }
     .caption{
         color: grey;
@@ -85,6 +90,8 @@
         margin-top: 10px;
         }
     .avitar:hover{
+        border: 3px solid;
+        border-color: #18181;
         border-color: white;
         transition-duration: 0.4s;
         -webkit-transition-duration: 0.4s;
@@ -119,7 +126,7 @@
         transition-duration: 0.4s;
         -webkit-transition-duration: 0.4s;
         }
-
+  
 
 
 
@@ -133,16 +140,17 @@
    <table id="table">
        <tr>
            <td>
-                <div style="align: left; text-align:center;">
+               <div style="align: left; text-align:center;" onclick="google.com">
                     <img src="icon 1.png" alt="list item 1" class="avitar" style="width:150px" />
-                    <div class="caption">Joel</div>    
-                <div />
+                    <div class="caption">Joel</div>                
+                 <div /> 
+                       
            </td>
            <td>
-               <div style="align: left; text-align:center;">
-                    <img src="icon 2.png" alt="list item 2" class="avitar" style="width:150px" />
-                    <div class="caption">Mum</div>    
-                <div />
+               <a href="http://home.joelwolinsky.com/"  style="align: left; text-align:center;text-decoration:none">
+                    <img src="icon 2.png" alt="list item 2" class="avitar" style="width:150px;"/>
+                    <div class="caption" >Mum</div>    
+                <a/>
            </td>
            <td>
                <div style="align: left; text-align:center;">
@@ -156,9 +164,7 @@
     </table>
     <div class="accounts">MANAGE PROFILES</div> 
     
-    <?php
-        echo "hello"; 
-    ?>
+   
 </body>
 </html>
 
