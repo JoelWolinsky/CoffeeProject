@@ -26,7 +26,11 @@
                 width:100%;
                 table-layout: fixed;
                 
+                
                
+            }
+            table, th, td {
+                border: 1px solid white;
             }
             .row{
                 white-space: nowrap;
@@ -37,9 +41,14 @@
                 color: white;
                 font-size: 25px;
                 font-family: "Helvetica Neue",sans-serif; 
-                margin-top: 50px;
+                text-align: center;
                 position:relative;
-                padding: 40px;   
+                max-width:80%;
+                 
+                
+            }
+            td{
+                max-height : 25%;
             }
             .green{
                 color: lawngreen;
@@ -84,10 +93,50 @@
             ul.a {
                 list-style-type: circle;
             }
-   
+
+            div.scrollmenu {
+                background-color: #181818;
+                overflow: auto;
+                white-space: nowrap;
+                width:95%;
+                text-align: center;
+                height:100%;
                 
                 
+             
                 
+            }
+
+            div.scrollmenu b {
+                display: inline-grid;
+                color: white;
+                align-content: center;
+                min-width:20%;
+                text-decoration: none;
+                margin: 2px;
+                border-width: 3px;
+                border-style: solid;
+                transition: font-size .2s;
+                border-color:white;
+                padding:20px;
+                max-width: 90%;
+                
+                
+
+
+       
+            }
+
+            div.scrollmenu b:hover {
+                font-size: 35px;
+            } 
+            .container3 {
+        
+                  width:100%;
+                  margin-left: 5%;
+                  align-content: center;
+                  
+            }   
                 
           
                 
@@ -108,9 +157,20 @@
             </tr>
             
             <tr>
-                <td valign="top" class="text">
-                     <dev class="text" >Current Scheduele:</dev>
-                     <dev class="text" style="font-size: 20px; padding-left: 100px"> <br/>Passionale 07:00 Weekdays</dev>
+                <td height="200px">
+                    <div class="container3">
+                            <div class="scrollmenu">
+                               <b class="text">07:00<br>Mondays<br>Decaf </b>
+                               <b class="text">07:00<br>Mondays<br>Decaf </b>
+                               <b class="text">07:00<br>Mondays<br>Decaf </b>
+                               <b class="text">07:00<br>Mondays<br>Decaf </b>
+                               <b class="text">07:00<br>Mondays<br>Decaf </b>
+                               <b class="text">07:00<br>Mondays<br>Decaf </b>
+                            </div>
+                    </div>
+                    
+                     
+                     
                 </td>
                 <td> 
                     <div align="center">
@@ -132,12 +192,17 @@
             </tr>
          
             <tr>
-                <td class="text">
-                    <ul class="a">
-                        <li>27/6/18 - 15:34 - Passionale</li>
-                        <li>27/6/18 - 15:34 - Passionale</li>
-                        <li>25/6/18 - 13:10 - Passionale</li>
-                     </ul>
+                <td>
+                        <div class="container3">
+                                <div class="scrollmenu">
+                                   <b class="text">27/6/18 </b>
+                                   <b class="text">27/6/18 - 15:34 - Passionale</b>
+                                   <b class="text">27/6/18 - 15:34 - Passionale</b>
+                                   <b class="text">27/6/18 - 15:34 - Passionale</b>
+                                   <b class="text">27/6/18 - 15:34 - Passionale</b>
+                                   <b class="text">27/6/18 - 15:34 - Passionale</b>
+                                </div>
+                        </div>
                 </td>
                 <td class=text>
                     <ul class="a">

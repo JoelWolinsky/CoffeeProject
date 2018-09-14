@@ -1,0 +1,24 @@
+{
+  "name": "socketnetflix",
+  "version": "1.0.0",
+  "description": "Coffee machine website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wolinsky1/CoffeeAttempt3.git"
+  },
+  "author": "Joel Wolinsky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wolinsky1/CoffeeAttempt3/issues"
+  },
+  "homepage": "https://github.com/Wolinsky1/CoffeeAttempt3#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "http": "0.0.0",
+    "socket.io": "^2.1.1"
+  }
+}

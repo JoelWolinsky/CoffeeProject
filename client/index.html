@@ -17,9 +17,9 @@
     .avitar{
         position: relative;
         border: 3px solid;
-        border-color: #18181;
+        border-color: #181811;
         transition: .5s ease;
-        }
+    }
     .caption{
         color: grey;
         font-family: "Helvetica Neue",sans-serif;
@@ -61,76 +61,7 @@
         transition-duration: 0.4s;
         -webkit-transition-duration: 0.4s;
         }
-
-
-
-
-    <style>
-    #menu-outer {
-        height: 100px;
-        }
-    #table {
-        display: table;   /* Allow the centering to work */
-        margin: 0 auto;
-        margin-top:40px;
-
-        }
-
-    .avitar{
-        
-        margin: 5px;
-        transition: .5s ease;
-        border-style: none;
-        
-        }
-    .caption{
-        color: grey;
-        font-family: "Helvetica Neue",sans-serif;
-        transition: .5s ease;
-        margin-top: 10px;
-        }
-    .avitar:hover{
-        border: 3px solid;
-        border-color: #18181;
-        border-color: white;
-        transition-duration: 0.4s;
-        -webkit-transition-duration: 0.4s;
-        }
-    .avitar:hover + .caption{
-        color:white
-        }
-    .accounts{
-        padding: 10px;
-        margin: auto;
-        margin-top: 20px;
-        width:15%;
-        border: 2px solid;
-        border-color: grey;
-        color: grey;
-        text-align: center;
-        font-size: 15px;
-        font-family: "Helvetica Neue",sans-serif;
-        letter-spacing:2px;
-        transition: .5s ease;
-        }
-    .title{
-        color:white;
-        font-size:45px;
-        text-align:center;
-        margin-top: 150px;
-        font-family: "Helvetica Neue",sans-serif;
-        }
-    .accounts:hover{
-        border-color: white;
-        color: white;
-        transition-duration: 0.4s;
-        -webkit-transition-duration: 0.4s;
-        }
-  
-
-
-
-    </style>
+        </style>
 
 </head>
 
@@ -140,30 +71,63 @@
    <table id="table">
        <tr>
            <td>
-               <div style="align: left; text-align:center;" onclick="google.com">
+               <a href="/users/joel" id='joel' style="align-content: left; text-align:center; text-decoration: none;">
                     <img src="icon 1.png" alt="list item 1" class="avitar" style="width:150px" />
                     <div class="caption">Joel</div>                
-                 <div /> 
-                       
+               </a>       
            </td>
            <td>
-               <a href="http://home.joelwolinsky.com/"  style="align: left; text-align:center;text-decoration:none">
+               <div id='mum' style="align-content: left; text-align:center;text-decoration:none">
                     <img src="icon 2.png" alt="list item 2" class="avitar" style="width:150px;"/>
                     <div class="caption" >Mum</div>    
-                <a/>
+                </div>
            </td>
            <td>
-               <div style="align: left; text-align:center;">
+               <div id='dad' style="align-content: left; text-align:center;" >
                     <img src="icon 4.png" alt="list item 3" class="avitar" style="width:150px" />
-                    <div class="caption">Rafi</div>    
-                <div />
-                   
-               <div />
+                    <div class="caption">Dad</div>
+                </div>  
            </td>
        </tr>
     </table>
     <div class="accounts">MANAGE PROFILES</div> 
-    
+
+    <script src="/socket.io/socket.io.js"></script>
+      <script>
+        
+        var userList = ['joel', 'mum', 'dad']; 
+        var socket = io("http://localhost:3000");
+
+        socket.on('click_received', function() {
+            console.log('Click has been proccessed') 
+        });
+        socket.on('data_from_client', function(data) {
+            console.log(data);
+        });
+
+        
+        // document.getElementById('joel').addEventListener('click', function(){
+        //     socket.emit('joel');
+        //     console.log('button clicked');
+        // });
+        // document.getElementById('mum').addEventListener('click', function(){
+        //     socket.emit('mum');
+        //     console.log('button clicked');
+        // });
+        // document.getElementById('dad').addEventListener('click', function(){
+        //     socket.emit('dad');
+        //     console.log('button clicked');
+        // });
+        
+
+        socket.on('clicked', function() {
+            var button = document.getElementById('button');
+            console.log('clicked');
+            document.getElementById("alert").innerHTML = "send clicked";
+            onClickHandler(button);
+            socket
+        });
+    </script>
    
 </body>
 </html>

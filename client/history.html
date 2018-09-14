@@ -1,0 +1,61 @@
+<html>
+<head>
+    <style>
+        #customers td, #customers th {
+            border: 1px solid grey;
+            padding: 8px;
+            font-size: 30px;
+            align-self: centre;
+            padding:5px;  
+            color: white;
+            font-family: "Helvetica Neue",sans-serif;
+        } 
+
+        #divTable{
+            padding: 50px;
+        }
+    </style>
+</head>
+<body bgcolor = #181818>        
+    <div id='divTable'>
+        <table id="customers" align='center'>
+
+            <tr><td>brewID</td><td>userID</td></tr> 
+
+            <tbody id="tbody"></tbody>
+    
+        </table>
+    </div>
+    
+    
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+        var socket = io("http://localhost:3000");
+        var user = document.location.pathname.split("/")[2] + "Data";
+        var mylist = []
+       // console.log(user);
+        socket.on('data_from_client', function(data) {
+            //mylist.push(data)
+            console.log(data)
+            //document.write(data);
+            
+
+            var globalCounter = 0;
+            var tbody = document.getElementById('tbody');
+            for (var i = 0; i < Object.keys(data).length; i++) {
+                var tr = "<tr>";
+                console.log(data[i]);
+                if (data[i].brewID.toString().substring(data[i].brewID.toString().indexOf('.'), data[i].brewID.toString().length) < 2) data[i].brewID += "0";
+
+                tr += "<td>" + data[i].brewID + "</td>" + "<td>" + data[i].userID.toString() + "</td></tr>";
+                tbody.innerHTML += tr;
+            }
+        });
+        
+        socket.emit('history_data_request',user);
+        
+    </script>
+</body>
+    
+</html>
