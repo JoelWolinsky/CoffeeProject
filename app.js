@@ -1,9 +1,10 @@
-//  /Users/joelwolinsky/Desktop/Project/SocketNetflix/app.js
+//      /Users/joelwolinsky/Desktop/Project/SocketNetflix/app.js
+//      /usr/local/mysql/bin/mysql -ujoeltest -pjoel123
 const SQL_OPT = {
     host: 'localhost',
-    user: 'joeltest',
-    password: 'joel123',
-    database: 'test1'
+    user: 'root',
+    password: 'password',
+    database: 'sys'
 };
 
 const express = require('express');
@@ -15,6 +16,9 @@ app.get("/", function(req, res) {
 });
 app.get("/users/joel", function(req, res) {
     res.sendFile(__dirname + "/client/history.html");
+});
+app.get("/users/motor", function(req, res) {
+    runMotors()
 });
 
 let server = require('http').createServer(app).listen(3000);
@@ -37,17 +41,18 @@ io.on('connection', function (socket) {
     socket.on('dad', function() {
         user = 'dad'
         console.log("dad received")
-        clicked(this);
+        clicked(this);pytho
     });
 
     socket.on('history_data_request', historyDataRequest);
+    socket.on('motor_request', runMotors);
+
 
 });
 
 let mysql = require('mysql');
 
-const spawn = require("child_process").spawn;
-const pythonProcess = spawn('python',["path/to/script.py"]);
+
 
 
 function historyDataRequest() {
@@ -59,20 +64,29 @@ function historyDataRequest() {
         //Select all customers and return the result object:
         //con.query("SELECT * FROM history WHERE userID IN (1)", function (err, result, fields,) {
         con.query("SELECT * FROM history order by (brewID)", function (err, result, fields,) {
-        if (err) throw err;
-                console.log(err);
-        dataList = [];
-        for(var i = 0; i < result.length; i++) {
-            brewID =  result[i].brewID;
-            userID = result[i].userID;
-            
+            if (err) throw err;
+                    console.log(err);
+            dataList = [];
+            for(let i = 0; i < result.length; i++) {
+                brewID =  result[i].brewID;
+                userID = result[i].userID;
+                time =  result[i].time;
+                date = result[i].date;
+                
+                
 
-            var data = {brewID, userID};
-            dataList.push(data);
-        }
-        console.log(dataList)
-        socket.emit('data_from_client', dataList);
+                var data = {brewID, userID, time, date};
+                dataList.push(data);
+            }
+            console.log(dataList)
+            socket.emit('data_from_client', dataList);
         });
         con.end();
     });
 };
+
+function runMotors() {
+    console.log("running runMotors")
+    const spawn = require("child_process").spawn;
+    const pythonProcess = spawn('python',["motortest.py", 'start']);
+}

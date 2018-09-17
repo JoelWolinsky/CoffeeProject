@@ -2,25 +2,40 @@
 <head>
     <style>
         #customers td, #customers th {
-            border: 1px solid grey;
+            border: 1px solid #595959;
             padding: 8px;
             font-size: 30px;
             align-self: centre;
             padding:5px;  
             color: white;
             font-family: "Helvetica Neue",sans-serif;
+            background-color:	 #595959;
         } 
 
         #divTable{
             padding: 50px;
         }
+        .home{
+                color: white;
+                position: absolute;
+                font-size: 20px;
+                font-family: "Helvetica Neue",sans-serif;
+                padding: 25px;
+            }
     </style>
 </head>
-<body bgcolor = #181818>        
+<body bgcolor = #181818> 
+    <img href="/users/motor" src="http://localhost:3000/LavazzaLogo.png" alt="logo" style="height:75px; margin-left:30px; position: sticky"/>
+    <dev class="home">Home</dev>       
     <div id='divTable'>
-        <table id="customers" align='center'>
+        <table id="customers" align='margin-left'>
 
-            <tr><td>brewID</td><td>userID</td></tr> 
+            <tr>
+                <td style='background-color: #e8ab93'>brewID</td>
+                <td style='background-color: #d27693'>userID</td>
+                <td style='background-color: #387b79'>time</td>
+                <td style='background-color: #2d4f3f'>date</td>
+                </tr> 
 
             <tbody id="tbody"></tbody>
     
@@ -37,7 +52,8 @@
        // console.log(user);
         socket.on('data_from_client', function(data) {
             //mylist.push(data)
-            console.log(data)
+            console.log(data);
+
             //document.write(data);
             
 
@@ -46,9 +62,7 @@
             for (var i = 0; i < Object.keys(data).length; i++) {
                 var tr = "<tr>";
                 console.log(data[i]);
-                if (data[i].brewID.toString().substring(data[i].brewID.toString().indexOf('.'), data[i].brewID.toString().length) < 2) data[i].brewID += "0";
-
-                tr += "<td>" + data[i].brewID + "</td>" + "<td>" + data[i].userID.toString() + "</td></tr>";
+                tr += "<td>" + data[i].brewID + "</td>" + "<td>" + data[i].userID.toString() + "</td>" + "<td>" + data[i].time.toString() + "</td>" + "<td>" + data[i].date.toString() + "</td></tr>";
                 tbody.innerHTML += tr;
             }
         });
