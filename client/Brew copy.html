@@ -5,7 +5,7 @@
         <style>
             .home{
                 color: white;
-                position: absolute;
+                position: fixed;
                 font-size: 20px;
                 font-family: "Helvetica Neue",sans-serif;
                 padding: 25px;
@@ -15,6 +15,7 @@
                 position: relative;;
                 table-layout: fixed;
                 height:150;
+                padding:10;
             }
             .im{
                 
@@ -23,8 +24,15 @@
                 
                 width:150px;     
                 display: block;
-                margin-left: auto;
-                margin-right: auto;
+               
+                
+                
+
+                margin-left: 50;
+                
+                
+                            
+                
                            
             }            
             table {
@@ -60,17 +68,26 @@
                 
             }
                 */
+               
+                 
 
+}
             
 
         </style>
     </head>
     <body bgcolor = #181818	>
             <img src="LavazzaLogo.png" alt="logo" style="height:75px; margin-left:30px; position: fixed"/>
-            <div class="home">Home</div>
-            <div class='container'><img class="im" src="Passionale.png"></body></div>
-            <div class='container'><img class="im" src="Passionale.png"></body></div>
-            <div class='container'><img class="im" src="Passionale.png"></body></div>
+            /<div class="home">Home</div>
+            
+            <div style="padding:20px;margin-top:100px">
+                <div class='container'><img class="im" src="Passionale.png"></body></div>
+                <div class='container'><img class="im" src="Passionale.png"></body></div>
+                <div class='container'><img class="im" src="Passionale.png"></body></div>
+            </div>
+                
+            
+            
            
                     
               
@@ -80,11 +97,17 @@
             console.log("hover")
             
             $(this).css('zIndex', '10');
+            
             $(this).children("img").animate({
-                'width': '200px',
-                'height': '200px',
-                'zindex': '1'
+                'width': '250px',
+                'height': '250px',
+                'zindex': '1',
+                'text-align': 'center',
+                'margin-left': '0px'
+                
                  },200)
+
+            
             
 
             } ,function(){
@@ -93,7 +116,8 @@
                 $(this).children("img").animate({
                     
                     'width': '150px',
-                    'height': '150px' },200)});
+                    'height': '150px',
+                    'margin-left': '+50' },200)});
                 
                 
             
