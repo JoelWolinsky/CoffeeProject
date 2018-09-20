@@ -12,7 +12,7 @@
             }
             .container{
                 width:150;
-                position: absolute;;
+                position: relative;;
                 table-layout: fixed;
                 height:150;
             }
@@ -20,7 +20,6 @@
                 
                 transition: .5s ease;
                 
-                table-layout: fixed;
                 
                 width:150px;     
                 display: block;
@@ -67,48 +66,36 @@
         </style>
     </head>
     <body bgcolor = #181818	>
-            <img src="LavazzaLogo.png" alt="logo" style="height:75px; margin-left:30px; position: sticky"/>
-            <dev class="home">Home</dev>
-            <table id="table" align="center">
-                <tr>
-                    <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                    <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                    <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                </tr>
-                <tr>
-                        <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                        <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                        <td><div class='container'></div><img class="im" src="Passionale.png"></td>
+            <img src="LavazzaLogo.png" alt="logo" style="height:75px; margin-left:30px; position: fixed"/>
+            <div class="home">Home</div>
+            <div class='container'><img class="im" src="Passionale.png"></body></div>
+            <div class='container'><img class="im" src="Passionale.png"></body></div>
+            <div class='container'><img class="im" src="Passionale.png"></body></div>
+           
                     
-                </tr>
-                <tr>
-                        <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                        <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                        <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                </tr>
-               
-            </table>
-               
-            </div>
-
+              
     </body>
     <script>
         $('.container').hover(function(){
             console.log("hover")
             
-            
-            $(this).siblings("img").animate({
+            $(this).css('zIndex', '10');
+            $(this).children("img").animate({
                 'width': '200px',
                 'height': '200px',
-                'webkit-z-index': '1'
+                'zindex': '1'
                  },200)
+            
 
             } ,function(){
-                
+                $(this).css('zIndex', '0');
                 console.log("hoverback")
-                $(this).siblings("img").animate({
+                $(this).children("img").animate({
+                    
                     'width': '150px',
                     'height': '150px' },200)});
+                
+                
             
         
     </script>
