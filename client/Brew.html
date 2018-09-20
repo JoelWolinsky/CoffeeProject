@@ -5,10 +5,11 @@
         <style>
             .home{
                 color: white;
-                position: fixed;
+                position: static;;
                 font-size: 20px;
                 font-family: "Helvetica Neue",sans-serif;
-                padding: 25px;
+                line-height: 30px;
+                
             }
             .container{
                 width:150;
@@ -20,14 +21,9 @@
             .im{
                 
                 transition: .5s ease;
-                
-                
                 width:150px;     
                 display: block;
-               
-                
-                
-
+                opacity: 0.75;
                 margin-left: 50;
                 
                 
@@ -71,31 +67,34 @@
                
                  
 
-}
+
             
 
         </style>
     </head>
     <body bgcolor = #181818	>
-            <img src="LavazzaLogo.png" alt="logo" style="height:75px; margin-left:30px; position: fixed"/>
-            /<div class="home">Home</div>
+            <a href='http://localhost:3000'><img src="LavazzaLogo.png"   alt="logo" style="height:75px; margin-left:30px; position: relative"/>
+            </a>
+        <a href='Brew.html' style='text-decoration:none'><div class="home" style='padding-left: 200px;margin-top:-50px;color:grey;'>Home</div></a>
+          <a href='history.html' style='text-decoration:none'><div class="home" style="margin-left:300px;margin-top:-30px;" >History</div></a>
+            <a href='Brew.html' style='text-decoration:none'><div class="home" style="margin-left:400px;margin-top:-30px;" >Scheduele</div></a>
             
-            <div style="padding:10px;margin-top:100px;margin-left:360px;">
-                <div class='container'><img class="im" src="Passionale.png"></body></div>
-                <div class='container'><img class="im" src="Passionale.png"></body></div>
-                <div class='container'><img class="im" src="Passionale.png"></body></div>
+            <div style="padding:10px;margin-top:50px;margin-left:360px;">
+                <div class='container'><img class="im" src="redpod.png"></body></div>
+                <div class='container'><img class="im" src="bluepod.png"></body></div>
+                <div class='container'><img class="im" src="redpod.png"></body></div>
             </div>
 
             <div style="padding:10px;margin-top:-530px;margin-left:540px;">
-                    <div class='container'><img class="im" src="Passionale.png"></body></div>
-                    <div class='container'><img class="im" src="Passionale.png"></body></div>
-                    <div class='container'><img class="im" src="Passionale.png"></body></div>
+                    <div class='container'><img class="im" src="bluepod.png"></body></div>
+                    <div class='container'><img class="im" src="redpod.png"></body></div>
+                    <div class='container'><img class="im" src="bluepod.png"></body></div>
             </div>
 
             <div style="padding:10px;margin-top:-530px;margin-left:720px;">
-                    <div class='container'><img class="im" src="Passionale.png"></body></div>
-                    <div class='container'><img class="im" src="Passionale.png"></body></div>
-                    <div class='container'><img class="im" src="Passionale.png"></body></div>
+                    <div class='container'><img class="im" src="redpod.png"></body></div>
+                    <div class='container'><img class="im" src="bluepod.png"></body></div>
+                    <div class='container'><img class="im" src="redpod.png"></body></div>
             </div>
                 
             
@@ -104,7 +103,10 @@
                     
               
     </body>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
+        
+
         $('.container').hover(function(){
             console.log("hover")
             
@@ -116,7 +118,8 @@
                 'zindex': '1',
                 'text-align': 'center',
                 'margin-left': '0px',
-                'margin-top': '-50px'
+                'margin-top': '-50px',
+                'opacity': '1'
                 
                  },200)
 
@@ -131,11 +134,15 @@
                     'width': '150px',
                     'height': '150px',
                     'margin-left': '+50',
-                    'margin-top': '0px'
-                     },200)});
+                    'margin-top': '0px',
+                    'opacity': '0.75'
+                     },200)}
+
+        )
                 
-                
-            
+        var username = document.cookie
+        console.log(username)
+        
         
     </script>
 </html>

@@ -72,7 +72,7 @@
    <table id="table">
        <tr>
            <td>
-               <a href="/users/joel" id='joel' style="align-content: left; text-align:center; text-decoration: none;">
+               <a href="Brew.html" id='joel' style="align-content: left; text-align:center; text-decoration: none;">
                     <img src="icon 1.png" alt="list item 1" class="avitar" style="width:150px" />
                     <div class="caption">Joel</div>                
                </a>       
@@ -107,18 +107,27 @@
         });
 
         
-        // document.getElementById('joel').addEventListener('click', function(){
-        //     socket.emit('joel');
-        //     console.log('button clicked');
-        // });
-        // document.getElementById('mum').addEventListener('click', function(){
-        //     socket.emit('mum');
-        //     console.log('button clicked');
-        // });
-        // document.getElementById('dad').addEventListener('click', function(){
-        //     socket.emit('dad');
-        //     console.log('button clicked');
-        // });
+         document.getElementById('joel').addEventListener('click', function(){
+             let http = new XMLHttpRequest();
+             http.open('POST', '/username',true);
+             http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+             http.addEventListener('load',function(){
+                 window.location('/Brew.html');
+             });
+             let body = 'name=joel'
+             console.log('joel clicked');
+             http.send(body);
+         });
+
+         document.getElementById('mum').addEventListener('click', function(){
+             socket.emit('mum');
+             console.log('mum clicked');
+         });
+
+         document.getElementById('dad').addEventListener('click', function(){
+             socket.emit('dad');
+             console.log('dad clicked');
+         });
         
 
         socket.on('clicked', function() {

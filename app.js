@@ -1,5 +1,7 @@
 //      /Users/joelwolinsky/Desktop/Project/SocketNetflix/app.js
 //      /usr/local/mysql/bin/mysql -ujoeltest -pjoel123
+let bodyP = require("body-parser");
+let cookieP = require("cookie-parser");
 const SQL_OPT = {
     host: 'localhost',
     user: 'root',
@@ -9,61 +11,82 @@ const SQL_OPT = {
 
 const express = require('express');
 let app = express();
-
 app.use(express.static("client"));
-app.get("/", function(req, res) {
-    res.sendFile("client/index.html");
+
+app.use(bodyP.urlencoded({ extended: true }));
+app.use(cookieP());
+app.post('/username', function(req,res){
+    let name = req.body.name;
+    console.log(name);
+    console.log(req.body);
+    res.cookie('name',name,{maxAge:60000});
+    res.sendFile(__dirname + '/client/Brew.html');
+    
 });
-app.get("/users/joel", function(req, res) {
-    res.sendFile(__dirname + "/client/history.html");
-});
-app.get("/users/motor", function(req, res) {
-    runMotors()
-});
+
+
+
+// app.get("/", function(req, res) {
+//     res.sendFile("client/index.html");
+// });
+// app.get("/users/joel", function(req, res) {
+//     res.sendFile(__dirname + "/client/history.html");
+// });
+// app.get("/users/motor", function(req, res) {
+//     runMotors()
+// });
 
 let server = require('http').createServer(app).listen(3000);
 
 let io = require('socket.io').listen(server);
 io.on('connection', function (socket) {
     console.log('a client has connected');
-    socket.on('joel', function() {
-        user = 'joel'
-        console.log("joel received")
-        clicked(this);
-    });
+        // socket.on('joel', function() {
+        //     user = 'joel'
+        //     console.log("joel received")
+        //     clicked(this);
 
-    socket.on('mum', function() {
-        user = 'mum'
-        console.log("mum received")
-        clicked(this);
-    });
+        // });
 
-    socket.on('dad', function() {
-        user = 'dad'
-        console.log("dad received")
-        clicked(this);pytho
-    });
+        // socket.on('mum', function() {
+        //     user = 'mum'
+        //     console.log("mum received")
+        //     clicked(this);
+        // });
+
+        // socket.on('dad', function() {
+        //     user = 'dad'
+        //     console.log("dad received")
+        //     clicked(this);pytho
+        // });
 
     socket.on('history_data_request', historyDataRequest);
     socket.on('motor_request', runMotors);
+    socket.on('username_history', historyname);
 
 
 });
 
 let mysql = require('mysql');
+var usernameHold = {}
+function historyname(name){
+    usernameHold.username = name;
+    console.log(usernameHold.username+" request to history");
+    //historyDataRequest(username)
+};
 
-
-
-
+console.log(usernameHold.username + "yeet")
 function historyDataRequest() {
     console.log("running history_data_request")
     let socket = this;
     let con = mysql.createConnection(SQL_OPT);
+    console.log(usernameHold.username+"request from history");
+    
     con.connect(function(err) {
         if (err) throw err;
         //Select all customers and return the result object:
         //con.query("SELECT * FROM history WHERE userID IN (1)", function (err, result, fields,) {
-        con.query("SELECT * FROM history order by (brewID)", function (err, result, fields,) {
+        con.query("SELECT * FROM history order by (brewID) WHERE name = '${user}' ", function (err, result, fields,) {
             if (err) throw err;
                     console.log(err);
             dataList = [];

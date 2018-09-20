@@ -17,16 +17,22 @@
         }
         .home{
                 color: white;
-                position: absolute;
+                position: static;;
                 font-size: 20px;
                 font-family: "Helvetica Neue",sans-serif;
-                padding: 25px;
+                line-height: 30px;
+                
             }
     </style>
 </head>
 <body bgcolor = #181818> 
-    <img href="/users/motor" src="http://localhost:3000/LavazzaLogo.png" alt="logo" style="height:75px; margin-left:30px; position: sticky"/>
-    <dev class="home">Home</dev>       
+        <a href='http://localhost:3000'><img src="LavazzaLogo.png"   alt="logo" style="height:75px; margin-left:30px; position: relative"/>
+        </a>
+        
+        <a href='Brew.html' style='text-decoration:none'><div class="home" style='padding-left: 200px;margin-top:-50px;'>Home</div></a>
+            <a href='history.html' style='text-decoration:none'><div class="home" style="margin-left:300px;margin-top:-30px;color" >History</div></a>
+            <a href='Brew.html' style='text-decoration:none'><div class="home" style="margin-left:400px;margin-top:-30px;" >Scheduele</div></a>
+                   
     <div id='divTable'>
         <table id="customers" align='margin-left'>
 
@@ -49,10 +55,13 @@
         var socket = io("http://localhost:3000");
         var user = document.location.pathname.split("/")[2] + "Data";
         var mylist = []
+        var username = document.cookie.split("=").pop();
+        console.log(username + "yes");
        // console.log(user);
         socket.on('data_from_client', function(data) {
             //mylist.push(data)
             console.log(data);
+        
 
             //document.write(data);
             
@@ -66,7 +75,7 @@
                 tbody.innerHTML += tr;
             }
         });
-        
+        socket.emit('username_history',username);
         socket.emit('history_data_request',user);
         
     </script>
