@@ -5,27 +5,34 @@
         <style>
             .home{
                 color: white;
-                position: absolute;
+                position: fixed;
                 font-size: 20px;
                 font-family: "Helvetica Neue",sans-serif;
                 padding: 25px;
             }
             .container{
                 width:150;
-                position: absolute;;
+                position: relative;;
                 table-layout: fixed;
                 height:150;
+                padding:10;
             }
             .im{
                 
                 transition: .5s ease;
                 
-                table-layout: fixed;
                 
                 width:150px;     
                 display: block;
-                margin-left: auto;
-                margin-right: auto;
+               
+                
+                
+
+                margin-left: 50;
+                
+                
+                            
+                
                            
             }            
             table {
@@ -61,54 +68,73 @@
                 
             }
                 */
+               
+                 
 
+}
             
 
         </style>
     </head>
     <body bgcolor = #181818	>
-            <img src="LavazzaLogo.png" alt="logo" style="height:75px; margin-left:30px; position: sticky"/>
-            <dev class="home">Home</dev>
-            <table id="table" align="center">
-                <tr>
-                    <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                    <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                    <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                </tr>
-                <tr>
-                        <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                        <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                        <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                    
-                </tr>
-                <tr>
-                        <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                        <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                        <td><div class='container'></div><img class="im" src="Passionale.png"></td>
-                </tr>
-               
-            </table>
-               
+            <img src="LavazzaLogo.png" alt="logo" style="height:75px; margin-left:30px; position: fixed"/>
+            /<div class="home">Home</div>
+            
+            <div style="padding:10px;margin-top:100px;margin-left:360px;">
+                <div class='container'><img class="im" src="Passionale.png"></body></div>
+                <div class='container'><img class="im" src="Passionale.png"></body></div>
+                <div class='container'><img class="im" src="Passionale.png"></body></div>
             </div>
 
+            <div style="padding:10px;margin-top:-530px;margin-left:540px;">
+                    <div class='container'><img class="im" src="Passionale.png"></body></div>
+                    <div class='container'><img class="im" src="Passionale.png"></body></div>
+                    <div class='container'><img class="im" src="Passionale.png"></body></div>
+            </div>
+
+            <div style="padding:10px;margin-top:-530px;margin-left:720px;">
+                    <div class='container'><img class="im" src="Passionale.png"></body></div>
+                    <div class='container'><img class="im" src="Passionale.png"></body></div>
+                    <div class='container'><img class="im" src="Passionale.png"></body></div>
+            </div>
+                
+            
+            
+           
+                    
+              
     </body>
     <script>
         $('.container').hover(function(){
             console.log("hover")
             
+            $(this).css('zIndex', '10');
             
-            $(this).siblings("img").animate({
-                'width': '200px',
-                'height': '200px',
-                'webkit-z-index': '1'
+            $(this).children("img").animate({
+                'width': '250px',
+                'height': '250px',
+                'zindex': '1',
+                'text-align': 'center',
+                'margin-left': '0px',
+                'margin-top': '-50px'
+                
                  },200)
 
+            
+            
+
             } ,function(){
-                
+                $(this).css('zIndex', '0');
                 console.log("hoverback")
-                $(this).siblings("img").animate({
+                $(this).children("img").animate({
+                    
                     'width': '150px',
-                    'height': '150px' },200)});
+                    'height': '150px',
+                    'margin-left': '+50',
+                    'margin-top': '0px'
+                     },200)});
+                
+                
             
         
     </script>
