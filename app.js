@@ -62,49 +62,43 @@ io.on('connection', function (socket) {
 
     socket.on('history_data_request', historyDataRequest);
     socket.on('motor_request', runMotors);
-    socket.on('username_history', historyname);
+  
 
 
 });
 
 let mysql = require('mysql');
-var usernameHold = {}
-function historyname(name){
-    usernameHold.username = name;
-    console.log(usernameHold.username+" request to history");
-    //historyDataRequest(username)
-};
 
-console.log(usernameHold.username + "yeet")
-function historyDataRequest() {
+function historyDataRequest(username) {
     console.log("running history_data_request")
     let socket = this;
     let con = mysql.createConnection(SQL_OPT);
-    console.log(usernameHold.username+"request from history");
-    
+    console.log(username+"request from history");
     con.connect(function(err) {
         if (err) throw err;
         //Select all customers and return the result object:
-        //con.query("SELECT * FROM history WHERE userID IN (1)", function (err, result, fields,) {
-        con.query("SELECT * FROM history order by (brewID) WHERE name = '${user}' ", function (err, result, fields,) {
-            if (err) throw err;
-                    console.log(err);
-            dataList = [];
-            for(let i = 0; i < result.length; i++) {
-                brewID =  result[i].brewID;
-                userID = result[i].userID;
-                time =  result[i].time;
-                date = result[i].date;
-                
-                
-
-                var data = {brewID, userID, time, date};
-                dataList.push(data);
-            }
-            console.log(dataList)
-            socket.emit('data_from_client', dataList);
+        con.query("SELECT userID FROM users WHERE name = ?", [username], function (err, result, fields) {
+            let id = result[0].userID;
+            con.query(`SELECT * FROM history WHERE userID = ? ORDER BY (brewID)`, [id], function (err, result, fields,) {
+                if (err) throw err;
+                        console.log(err);
+                dataList = [];
+                for(let i = 0; i < result.length; i++) {
+                    brewID =  result[i].brewID;
+                    userID = result[i].userID;
+                    time =  result[i].time;
+                    date = result[i].date;
+                    
+                    
+    
+                    var data = {brewID, userID, time, date};
+                    dataList.push(data);
+                }
+                console.log(dataList)
+                socket.emit('data_from_client', dataList);
+                con.end();
+            });
         });
-        con.end();
     });
 };
 

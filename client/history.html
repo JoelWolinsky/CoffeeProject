@@ -53,7 +53,6 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
         var socket = io("http://localhost:3000");
-        var user = document.location.pathname.split("/")[2] + "Data";
         var mylist = []
         var username = document.cookie.split("=").pop();
         console.log(username + "yes");
@@ -75,8 +74,8 @@
                 tbody.innerHTML += tr;
             }
         });
-        socket.emit('username_history',username);
-        socket.emit('history_data_request',user);
+        
+        socket.emit('history_data_request',username);
         
     </script>
 </body>

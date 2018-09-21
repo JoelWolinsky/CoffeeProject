@@ -50,52 +50,68 @@
 
                 
             }
-            /*.container:hover .img{
-                transition-duration: 1s;
-                -webkit-transition-duration: 1s;
-                width:300;
-                padding:30px;
-                position: relative;
-                -webkit-z-index: 1;
-                -moz-z-index: 1;
-                -ms-z-index: 1;
-                -o-z-index: 1;
-                z-index: 1;
+            
+            .alert{
+                width:400px;
+                margin-top: -450px;
+                margin-left: 480px;
+                z-index: 10;
+                position: absolute;
+            }
+            
+
+            .cancel{
+                display:inline-block;
+                width: 180px;
+                height:60px;
+                z-index: 20;
+                margin-left:500;
+                margin-top:-300;
+                position: absolute;
                 
             }
-                */
-               
-                 
-
 
             
+
+
+         
 
         </style>
     </head>
-    <body bgcolor = #181818	>
-            <a href='http://localhost:3000'><img src="LavazzaLogo.png"   alt="logo" style="height:75px; margin-left:30px; position: relative"/>
-            </a>
-        <a href='Brew.html' style='text-decoration:none'><div class="home" style='padding-left: 200px;margin-top:-50px;color:grey;'>Home</div></a>
-          <a href='history.html' style='text-decoration:none'><div class="home" style="margin-left:300px;margin-top:-30px;" >History</div></a>
-            <a href='Brew.html' style='text-decoration:none'><div class="home" style="margin-left:400px;margin-top:-30px;" >Scheduele</div></a>
+    <div id="blur">
+            <body bgcolor = #181818	>
+                    <a href='http://localhost:3000'><img src="LavazzaLogo.png"   alt="logo" style="height:75px; margin-left:30px; position: relative"/>
+                    </a>
+                <a href='Brew.html' style='text-decoration:none'><div class="home" style='padding-left: 200px;margin-top:-50px;color:grey;'>Home</div></a>
+                  <a href='history.html' style='text-decoration:none'><div class="home" style="margin-left:300px;margin-top:-30px;" >History</div></a>
+                    <a href='Brew.html' style='text-decoration:none'><div class="home" style="margin-left:400px;margin-top:-30px;" >Scheduele</div></a>
+                    
+                    <div style="padding:10px;margin-top:50px;margin-left:360px;">
+                        <div class='container'><img class="im" src="redpod.png" onclick="showDiv()"></body></div>
+                        <div class='container'><img class="im" src="bluepod.png" onclick="showDiv()"></body></div>
+                        <div class='container'><img class="im" src="redpod.png"onclick="showDiv()"></body></div>
+                    </div>
+        
+                    <div style="padding:10px;margin-top:-530px;margin-left:540px;">
+                            <div class='container'><img class="im" src="bluepod.png" onclick="showDiv()"></body></div>
+                            <div class='container'><img class="im" src="redpod.png" onclick="showDiv()"></body></div>
+                            <div class='container'><img class="im" src="bluepod.png" onclick="showDiv()"></body></div>
+                    </div>
+        
+                    <div style="padding:10px;margin-top:-530px;margin-left:720px;">
+                            <div class='container'><img class="im" src="redpod.png" onclick="showDiv()"></body></div>
+                            <div class='container'><img class="im" src="bluepod.png" onclick="showDiv()"></body></div>
+                            <div class='container'><img class="im" src="redpod.png" onclick="showDiv()"></body></div>
+                    </div>
+    </div>
+   
+
+            <div id="welcomeDiv"  style="display:none;" class="answer_list" >
+                <img class='alert' src='brewalert.png'/>
+                <div class='cancel' onclick='hideDiv()'></div>
+            </div>
             
-            <div style="padding:10px;margin-top:50px;margin-left:360px;">
-                <div class='container'><img class="im" src="redpod.png"></body></div>
-                <div class='container'><img class="im" src="bluepod.png"></body></div>
-                <div class='container'><img class="im" src="redpod.png"></body></div>
-            </div>
 
-            <div style="padding:10px;margin-top:-530px;margin-left:540px;">
-                    <div class='container'><img class="im" src="bluepod.png"></body></div>
-                    <div class='container'><img class="im" src="redpod.png"></body></div>
-                    <div class='container'><img class="im" src="bluepod.png"></body></div>
-            </div>
-
-            <div style="padding:10px;margin-top:-530px;margin-left:720px;">
-                    <div class='container'><img class="im" src="redpod.png"></body></div>
-                    <div class='container'><img class="im" src="bluepod.png"></body></div>
-                    <div class='container'><img class="im" src="redpod.png"></body></div>
-            </div>
                 
             
             
@@ -105,7 +121,21 @@
     </body>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        
+        function blur(){
+            document.getElementById('blur').style.filter = 'blur(5px)'
+        }
+        function unblur(){
+            document.getElementById('blur').style.filter = 'blur(0px)'
+        }
+        function showDiv() {
+             document.getElementById('welcomeDiv').style.display = "block";
+             blur()
+                }
+        function hideDiv() {
+            unblur()
+            console.log("hidden")
+             document.getElementById('welcomeDiv').style.display = "none";
+                }
 
         $('.container').hover(function(){
             console.log("hover")
