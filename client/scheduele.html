@@ -1,0 +1,129 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="wickedpicker.js"></script>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+        $( function() {
+            $( "#datepicker" ).datepicker();
+        } );
+        </script>
+</head>
+    <style>
+        .home{
+                color: white;
+                position: static;;
+                font-size: 20px;
+                font-family: "Helvetica Neue",sans-serif;
+                line-height: 30px;
+            }
+
+            input[type=text], select {
+                font-size: 18px;
+                width: 200px;
+                color:grey;
+                background-color: white;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                margin-left:50px;
+                margin:20px
+            }
+            label{
+                color:white;
+                font-family: "Helvetica Neue",sans-serif;
+                font-size: 30px;
+                
+            }
+            .date{
+                color:white;
+            }
+
+            .weekDays-selector input {
+                display: none!important;
+                }
+
+            .weekDays-selector input[type=checkbox] + label {
+                display: inline-block;
+                border-radius: 6px;
+                background: #dddddd;
+                height: 40px;
+                width: 70px;
+                margin-right: 3px;
+                line-height: 40px;
+                text-align: center;
+                cursor: pointer;
+                }
+
+            .weekDays-selector input[type=checkbox]:checked + label {
+                background: #2AD705;
+                color: #ffffff;
+                }
+    </style>
+
+    <body bgcolor = #181818
+        <a href='http://localhost:3000'><img src="LavazzaLogo.png"   alt="logo" style="height:75px; margin-left:30px; position: relative"></a>
+        
+        <a href='Brew.html' style='text-decoration:none'><div class="home" style='padding-left: 200px;margin-top:-50px;'>Home</div></a>
+            <a href='history.html' style='text-decoration:none'><div class="home" style="margin-left:300px;margin-top:-30px;color:white" >History</div></a>
+            <a href='scheduele.html' style='text-decoration:none'><div class="home" style="margin-left:400px;margin-top:-30px;margin-bottom: 50px" >Scheduele</div></a>>
+        
+        <label for="type">Type</label>
+        <div >
+                <select id="type" name="type">
+                        <option value="Caffinated">Caffinated</option>
+                        <option value="Decaffinated">Decaffinated</option>
+                        
+                    </select>
+        </div>
+        <label for="type" style="margin-left:10px">Date</label>
+        <div>
+            <input  class='date'  type="text" id="datepicker" placeholder="Date">
+        </div>
+
+        <div class="weekDays-selector" id='boxarray'>
+                <input type="checkbox" id="Monday" class="weekday" name='box' />
+                <label for="Monday">Mon</label>
+                <input type="checkbox" id="Tuesday" class="weekday" name='box'/>
+                <label for="Tuesday">Tue</label>
+                <input type="checkbox" id="Wednesday" class="weekday" name='box'/>
+                <label for="Wednesday">Wed</label>
+                <input type="checkbox" id="Thursday" class="weekday" name='box' />
+                <label for="Thursday">Thu</label>
+                <input type="checkbox" id="Friday" class="weekday" name='box' />
+                <label for="Friday">Fri</label>
+                <input type="checkbox" id="Saturday" class="weekday" name='box'/>
+                <label for="Saturday">Sat</label>
+                <input type="checkbox" id="Sunday" class="weekday" name='box'/>
+                <label for="Sunday">Sun</label>
+              </div>
+        
+              <input type="text" name="timepicker" class="timepicker"/>
+    </body>
+    <script>
+        // var mon=tue=wed=thu=fri=sat=sun = 0
+        // document.getElementById('weekday-mon').addEventListener('click', function(){
+        //     console.log('mon clicked');
+        //     mon += 1
+        //     console.log(mon)
+        var $boxes = $("input[name=box]:checked");
+        setTimeout(print,3000);
+        function print(){
+            var $boxes = $("input[name=box]:checked")
+            console.log($boxes)}
+        
+            $('.timepicker').wickedpicker();
+
+    </script>
+</html>
