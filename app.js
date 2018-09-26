@@ -1,5 +1,7 @@
 //      /Users/joelwolinsky/Desktop/Project/SocketNetflix/app.js
 //      /usr/local/mysql/bin/mysql -ujoeltest -pjoel123
+
+
 let bodyP = require("body-parser");
 let cookieP = require("cookie-parser");
 const SQL_OPT = {
@@ -19,7 +21,7 @@ app.post('/username', function(req,res){
     let name = req.body.name;
     console.log(name);
     console.log(req.body);
-    res.cookie('name',name,{maxAge:60000});
+    res.cookie('name',name,{maxAge:600000});
     res.sendFile(__dirname + '/client/Brew.html');
     
 });
