@@ -238,7 +238,7 @@
                 <label for="type">Type</label>
                 
                 <div style='margin-bottom:50px'>
-                    <select id="type" name="type">
+                    <select class='type' id="type" name="type">
                         <option value="Caffinated">Caffinated</option>
                         <option value="Decaffinated">Decaffinated</option>
                     </select>  
@@ -246,10 +246,10 @@
 
             </div>
             
-            <div class='two' id='two1'   onclick='test1()' style='border-top-right-radius: 20px;border-top-left-radius: 20px;height:180;position:relative;animation-fill-mode:forwards; -webkit-animation-fill-mode:forwards;'>
+            <div class='two' id='two1'   onclick='test1()' style='border-top-right-radius: 20px;border-top-left-radius: 20px;height:180;position:relative;animation-fill-mode:forwards; -webkit-animation-fill-mode:forwards;z-index: 20'>
                     <label for="type" style="margin-left:10px">Pick a Single Date</label>
                     <div>
-                        <input  class='date'  type="text" id="datepicker" placeholder="Date">    
+                        <input  class='date'  type="text"  id="datepicker" placeholder="Date">    
                     </div>
                 </div>
             
@@ -261,7 +261,7 @@
             <div class='one'>
                 <label for="type">Time</label>
                 <div>
-                    <input id='timepicker' type='text'name='timepicker' placeholder="HH:MM:SS"/>
+                    <input id='timepicker'  type='text'name='timepicker' placeholder="HH:MM:SS"/>
                 </div>
             </div>
             
@@ -289,7 +289,7 @@
         </section>
 
 
-        <div class='submit'>
+        <div class='submit' onclick='submit()' style="cursor: pointer;">
             <a>Submit</a>
         </div>
     </div>
@@ -315,19 +315,10 @@
    
 
 
+    <script src="/socket.io/socket.io.js"></script>
 
     <script>
-        // var mon=tue=wed=thu=fri=sat=sun = 0
-        // document.getElementById('weekday-mon').addEventListener('click', function(){
-        //     console.log('mon clicked');
-        //     mon += 1
-        //     console.log(mon)
-        var $boxes = $("input[name=box]:checked");
-        setTimeout(print,3000);
-        function print(){
-            var $boxes = $("input[name=box]:checked")
-            console.log($boxes)
-        }
+       
         var x = 0
         var y = 0 
         console.log("X",x)
@@ -342,7 +333,7 @@
                 
                 document.getElementById('overlay2').style.zIndex = '10';
                 document.getElementById('overlay2').style.opacity = '0.99999';
-                document.getElementById('two1').style.zIndex = '11';
+                document.getElementById('two1').style.zIndex = '12';
                 document.getElementById('two1').style.borderRadius= '20px'
 
                 document.getElementById('test11').style.opacity = '1';
@@ -357,21 +348,7 @@
                 console.log(x)
              }
              else{
-                // console.log(4)
                 
-                // $('.two').addClass('move22');
-                // //$(yes).addClass('newtwotop');
-                
-                // document.getElementById('overlay2').style.zIndex = '0';
-                // document.getElementById('overlay2').style.opacity = '0';
-                // document.getElementById('two1').style.zIndex = '1';
-                
-                // document.getElementById('two1').style.borderBottomLeftRadius= '0';
-                // document.getElementById('two1').style.borderBottomRightRadius= '0';
-                // $('.two').removeClass('move');
-                // $('.two').addClass('.two');
-                // window.x=0;
-                // console.log(x);
             }   
             console.log(window.x)
             
@@ -406,9 +383,9 @@
                 //var yes = $(this);
                 $('.two2').addClass('twonew');
                 
-                document.getElementById('overlay1').style.zIndex = '1';
+                document.getElementById('overlay1').style.zIndex = '30';
                 document.getElementById('overlay1').style.opacity = '0.99999';
-                document.getElementById('two2').style.zIndex = '10';
+                document.getElementById('two2').style.zIndex = '31';
                 document.getElementById('two2').style.borderRadius= '20px'
 
                 document.getElementById('test22').style.opacity = '1';
@@ -421,24 +398,7 @@
                 console.log(y)
              }
              else{
-                // console.log(4)
                 
-                // $('.two2').addClass('move11');
-                // //$(yes).addClass('newtwotop');
-                
-                // document.getElementById('overlay1').style.zIndex = '0';
-                // document.getElementById('overlay1').style.opacity = '0';
-                // document.getElementById('two2').style.zIndex = '10';
-                
-                // document.getElementById('two2').style.borderBottomLeftRadius= '20';
-                // document.getElementById('two2').style.borderBottomRightRadius= '20';
-
-                // document.getElementById('two2').style.borderTopLeftRadius= '0';
-                // document.getElementById('two2').style.borderTopRightRadius= '0';
-                // $('.two2').removeClass('move');
-                // $('.two2').addClass('.two');
-                // window.y=0;
-                // console.log(y);
             }   
             console.log(window.x)
             
@@ -466,102 +426,49 @@
                 window.y=0;
                 console.log(y);
         }
-           
-            
-             
+
+
+        function submit(){
+            console.log('submit')
+
+            var socket = io("http://localhost:3000");
+            var username = document.cookie.split("=").pop();
+            console.log(username)
         
+            //find type from user
+            var selectedType = $(".type option:selected").val();
+            console.log(selectedType);
 
-        // $('.two2').click(function() {
-        //     console.log("on");
-        //     document.getElementById('overlay1').style.zIndex = '9';
-        //     document.getElementById('overlay1').style.opacity = '0.99999';
-        //     document.getElementById('two2').style.zIndex = '20';
-        //     document.getElementById('two2').style.borderRadius= '20px'
+            //find time
+            var userTime = document.getElementById('timepicker').value;
+            console.log(userTime)
+
+            if(x===0){
+                //find week days    
+                var checked = $("[name=box]:checked");
+                var userDays = []
+                for (i = 0; i <= (checked.length-1); i++) {
+                        userDays.push(checked[i].id);
+                    };
+                console.log(userDays)
+                alert('Are you sure you want to schedule a '+selectedType+ ' coffee for '+userTime+' on these days: '+userDays)
+                var dataToSend = [{name:username,type:selectedType,time:userTime,days:userDays}]
+                console.log(dataToSend)
+            }
+            else{
+                //find date
+                var userDate = document.getElementById('datepicker').value;
+                console.log(userDate)
+                alert('Are you sure you want to schedule a '+selectedType+ ' coffee for '+userTime+' on '+userDate)
+                var dataToSend = [{name:username,type:selectedType,time:userTime,days:userDate}]
+                console.log(dataToSend)
+            }
+            socket.emit('scheduleData',dataToSend);
             
-        //     //$(this).removeClass('two2');
-        //     $(this).addClass('twonew');
-        //     console.log('two1new')
-
-        //     $('.two2').click(function() {
-        //     console.log("on");
-        //     document.getElementById('overlay1').style.zIndex = '0';
-        //     document.getElementById('overlay1').style.opacity = '0';
-        //     document.getElementById('two2').style.zIndex = '0';
-            
-
-        //     document.getElementById('two2').style.borderTopLeftRadius= '0'
-        //     document.getElementById('two2').style.borderTopRightRadius= '0'
-            
-        //     //$(this).removeClass('two2');
-        //     $(this).addClass('move11');
-        //     // $(this).addClass('newtwotop');
-        //     console.log('two1new')
-        // });
-        // });
+        }
 
 
-
-
-
-
-
-
-
-
-
-
-
-        // $(document).on('click', ".two", function() {
-        //     var yes = $(this);
-        //     $(yes).addClass('two1new');
-            
-        //     document.getElementById('overlay2').style.zIndex = '1';
-        //     document.getElementById('overlay2').style.opacity = '0.99999';
-        //     document.getElementById('two1').style.zIndex = '10';
-        //     document.getElementById('two1').style.borderRadius= '20px'
-
-        // $(document).on('click', ".two", function() {
-        //     var yes = $(this);
-        //     $(yes).addClass('move22');
-        //     //$(yes).addClass('newtwotop');
-            
-        //     document.getElementById('overlay2').style.zIndex = '0';
-        //     document.getElementById('overlay2').style.opacity = '0';
-        //     document.getElementById('two1').style.zIndex = '0';
-            
-        //     document.getElementById('two1').style.borderBottomLeftRadius= '0'
-        //     document.getElementById('two1').style.borderBottomRightRadius= '0'
-        // });
-        // });
-
-        // $('.two2').click(function() {
-        //     console.log("on");
-        //     document.getElementById('overlay1').style.zIndex = '9';
-        //     document.getElementById('overlay1').style.opacity = '0.99999';
-        //     document.getElementById('two2').style.zIndex = '20';
-        //     document.getElementById('two2').style.borderRadius= '20px'
-            
-        //     //$(this).removeClass('two2');
-        //     $(this).addClass('twonew');
-        //     console.log('two1new')
-
-        //     $('.two2').click(function() {
-        //     console.log("on");
-        //     document.getElementById('overlay1').style.zIndex = '0';
-        //     document.getElementById('overlay1').style.opacity = '0';
-        //     document.getElementById('two2').style.zIndex = '0';
-            
-
-        //     document.getElementById('two2').style.borderTopLeftRadius= '0'
-        //     document.getElementById('two2').style.borderTopRightRadius= '0'
-            
-        //     //$(this).removeClass('two2');
-        //     $(this).addClass('move11');
-        //     // $(this).addClass('newtwotop');
-        //     console.log('two1new')
-        // });
-        // });
-
+   
 
         
         

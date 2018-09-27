@@ -64,6 +64,7 @@ io.on('connection', function (socket) {
 
     socket.on('history_data_request', historyDataRequest);
     socket.on('motor_request', runMotors);
+    socket.on('scheduleData',scheduleDB)
   
 
 
@@ -108,4 +109,7 @@ function runMotors() {
     console.log("running runMotors")
     const spawn = require("child_process").spawn;
     const pythonProcess = spawn('python',["motortest.py", 'start']);
+}
+function scheduleDB(data){
+    console.log(data)
 }
