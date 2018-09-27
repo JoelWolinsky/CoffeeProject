@@ -301,7 +301,13 @@
     <div class='overlay' id='overlay1' style='background-color: grey;border-top-right-radius: 20px;border-top-left-radius: 20px;'></div>
     <div class='overlay' id='overlay2' style='background-color: grey;margin-top:0;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;margin-top:-20px;'></div>
 
-   
+    <div onclick='test11()'id='test11' style="background-color:#2AD705;width:260px;cursor: pointer;margin-left:750px;height:30px;margin-top:-50;position: absolute;z-index: 10;opacity:0" >
+       <a class='title' style='font-size:20;padding:none;margin:none;z-index:inh100' >Pick a day instead</a>
+    </div>
+
+    <div onclick='test22()' id='test22' style="background-color:#2AD705;width:260px;cursor: pointer;margin-left:750px;height:30px;margin-top:-50;position: absolute;z-index: 10;opacity:0">
+        <a class='title' style='font-size:20;padding:none;margin:none;' >Pick a date instead</a>
+    </div>
         
         
               
@@ -325,7 +331,7 @@
         var x = 0
         var y = 0 
         console.log("X",x)
-         function test1() {
+        function test1() {
              console.log('x=',x)
              if (window.x===0){
                 $('.two').removeClass('move22');
@@ -338,6 +344,10 @@
                 document.getElementById('overlay2').style.opacity = '0.99999';
                 document.getElementById('two1').style.zIndex = '11';
                 document.getElementById('two1').style.borderRadius= '20px'
+
+                document.getElementById('test11').style.opacity = '1';
+                document.getElementById('test11').style.zIndex = '11';
+
                 
                 //$('.two').removeClass('two1new');
                 $('.two').addClass('.two');
@@ -347,26 +357,46 @@
                 console.log(x)
              }
              else{
-                console.log(4)
+                // console.log(4)
                 
-                $('.two').addClass('move22');
-                //$(yes).addClass('newtwotop');
+                // $('.two').addClass('move22');
+                // //$(yes).addClass('newtwotop');
                 
-                document.getElementById('overlay2').style.zIndex = '0';
-                document.getElementById('overlay2').style.opacity = '0';
-                document.getElementById('two1').style.zIndex = '1';
+                // document.getElementById('overlay2').style.zIndex = '0';
+                // document.getElementById('overlay2').style.opacity = '0';
+                // document.getElementById('two1').style.zIndex = '1';
                 
-                document.getElementById('two1').style.borderBottomLeftRadius= '0';
-                document.getElementById('two1').style.borderBottomRightRadius= '0';
-                $('.two').removeClass('move');
-                $('.two').addClass('.two');
-                window.x=0;
-                console.log(x);
+                // document.getElementById('two1').style.borderBottomLeftRadius= '0';
+                // document.getElementById('two1').style.borderBottomRightRadius= '0';
+                // $('.two').removeClass('move');
+                // $('.two').addClass('.two');
+                // window.x=0;
+                // console.log(x);
             }   
             console.log(window.x)
             
         }
+        function test11(){
+            console.log('test11')
+                
+            $('.two').addClass('move22');
+            //$(yes).addClass('newtwotop');
+            
+            document.getElementById('overlay2').style.zIndex = '0';
+            document.getElementById('overlay2').style.opacity = '0';
+            document.getElementById('two1').style.zIndex = '1';
+            
+            document.getElementById('two1').style.borderBottomLeftRadius= '0';
+            document.getElementById('two1').style.borderBottomRightRadius= '0';
 
+            document.getElementById('test11').style.opacity = '0';
+            document.getElementById('test11').style.zIndex = '0';
+            $('.two').removeClass('move');
+            $('.two').addClass('.two');
+            window.x=0;
+            console.log(x);
+        }
+        
          function test2() {
              console.log('y=',y)
              if (window.y===0){
@@ -380,6 +410,9 @@
                 document.getElementById('overlay1').style.opacity = '0.99999';
                 document.getElementById('two2').style.zIndex = '10';
                 document.getElementById('two2').style.borderRadius= '20px'
+
+                document.getElementById('test22').style.opacity = '1';
+                document.getElementById('test22').style.zIndex = '11';
                 //$('.two').removeClass('two1new');
                 $('.two2').addClass('.two');
                 window.y = 1
@@ -388,7 +421,30 @@
                 console.log(y)
              }
              else{
-                console.log(4)
+                // console.log(4)
+                
+                // $('.two2').addClass('move11');
+                // //$(yes).addClass('newtwotop');
+                
+                // document.getElementById('overlay1').style.zIndex = '0';
+                // document.getElementById('overlay1').style.opacity = '0';
+                // document.getElementById('two2').style.zIndex = '10';
+                
+                // document.getElementById('two2').style.borderBottomLeftRadius= '20';
+                // document.getElementById('two2').style.borderBottomRightRadius= '20';
+
+                // document.getElementById('two2').style.borderTopLeftRadius= '0';
+                // document.getElementById('two2').style.borderTopRightRadius= '0';
+                // $('.two2').removeClass('move');
+                // $('.two2').addClass('.two');
+                // window.y=0;
+                // console.log(y);
+            }   
+            console.log(window.x)
+            
+        }
+        function test22(){
+            console.log('test22')
                 
                 $('.two2').addClass('move11');
                 //$(yes).addClass('newtwotop');
@@ -402,13 +458,13 @@
 
                 document.getElementById('two2').style.borderTopLeftRadius= '0';
                 document.getElementById('two2').style.borderTopRightRadius= '0';
+
+                document.getElementById('test22').style.opacity = '0';
+                document.getElementById('test22').style.zIndex = '0';
                 $('.two2').removeClass('move');
                 $('.two2').addClass('.two');
                 window.y=0;
                 console.log(y);
-            }   
-            console.log(window.x)
-            
         }
            
             
