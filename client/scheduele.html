@@ -452,7 +452,7 @@
                     };
                 console.log(userDays)
                 alert('Are you sure you want to schedule a '+selectedType+ ' coffee for '+userTime+' on these days: '+userDays)
-                var dataToSend = [{name:username,type:selectedType,time:userTime,days:userDays}]
+                var dataToSend = {'name':username,'type':selectedType,'time':userTime,'date':userDays}
                 console.log(dataToSend)
             }
             else{
@@ -460,7 +460,7 @@
                 var userDate = document.getElementById('datepicker').value;
                 console.log(userDate)
                 alert('Are you sure you want to schedule a '+selectedType+ ' coffee for '+userTime+' on '+userDate)
-                var dataToSend = [{name:username,type:selectedType,time:userTime,days:userDate}]
+                var dataToSend = {'name':username,'type':selectedType,'time':userTime,'date':userDate}
                 console.log(dataToSend)
             }
             socket.emit('scheduleData',dataToSend);
