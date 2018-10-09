@@ -20,7 +20,7 @@ app.post("/username", function(req, res) {
   let name = req.body.name;
   console.log(name);
   console.log(req.body);
-  res.cookie("name", name, { maxAge: 600000 });
+  res.cookie("name", name, { maxAge: 6000000 });
   res.sendFile(__dirname + "/client/Brew.html");
 });
 
@@ -209,3 +209,56 @@ function repeatWeek() {
   d.setDate(d.getDate() + 7);
   console.log("<br>in 7 days it is: " + d.toLocaleString());
 }
+
+
+// var five =require('johnny-five'); //require/import the johnny-five module
+// var board=new five.Board(); //the Board class from johnny-five module
+
+// // When the board is ready create a led object on pin 13 and blink it 
+// // every 500 milliseconds.
+
+// board.on('ready',function(){
+//     var led=new five.Led(13);
+//     led.blink(500);});
+
+
+
+var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+
+  /**
+   * In order to use the Stepper class, your board must be flashed with
+   * either of the following:
+   *
+   * - AdvancedFirmata https://github.com/soundanalogous/AdvancedFirmata
+   * - ConfigurableFirmata https://github.com/firmata/arduino/releases/tag/v2.6.2
+   *
+   */
+  console.log('run')
+  var stepper = new five.Stepper({
+    type: five.Stepper.TYPE.DRIVER,
+    stepsPerRev: 200,
+    pins: {
+      step: 12,
+      dir: 11
+    }
+  });
+  console.log('run')
+  // Make 10 full revolutions counter-clockwise at 180 rpm with acceleration and deceleration
+  stepper.rpm(180).ccw().accel(1600).decel(1600).step(2000, function() {
+
+    console.log("Done moving CCW");
+
+    // once first movement is done, make 10 revolutions clockwise at previously
+    //      defined speed, accel, and decel by passing an object into stepper.step
+    stepper.step({
+      steps: 2000,
+      direction: five.Stepper.DIRECTION.CW
+    }, function() {
+      console.log("Done moving CW");
+    });
+  });
+});
+
