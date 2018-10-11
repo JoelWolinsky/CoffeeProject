@@ -15,28 +15,41 @@ let app = express();
 app.use(express.static("client"));
 
 app.use(bodyP.urlencoded({ extended: true }));
-app.use(cookieP());
+app.use(cookieP("VfgJL4eJmW1U8XyJ5Gkm"));
+
+app.get("/", function(req, res) {
+  console.log(12323123);
+  if ("logged" in req.signedCookies) {
+    res.sendFile(__dirname + "/client/home.html");
+  } else {
+    res.sendFile(__dirname + "/client/login.html");
+  }
+});
+
+app.post("/login", function(req, res) {
+  console.log(req.body);
+  if (req.body.password == "thepassword123") {
+    res.cookie("logged", "true", {signed: true, maxAge:60000});
+    res.send("success");
+  } else {
+    res.status(403);
+    res.send();
+  }
+});
 app.post("/username", function(req, res) {
   let name = req.body.name;
   console.log(name);
   console.log(req.body);
-  res.cookie("name", name, { maxAge: 6000000 });
+  res.cookie("name", name, { maxAge: 6000000});
   res.sendFile(__dirname + "/client/Brew.html");
 });
+app.get("*", function(req, res) {
+  res.status(404);
+  res.send("File not found");
+});
 
-// app.get("/", function(req, res) {
-//     res.sendFile("client/index.html");
-// });
-// app.get("/users/joel", function(req, res) {
-//     res.sendFile(__dirname + "/client/history.html");
-// });
-// app.get("/users/motor", function(req, res) {
-//     runMotors()
-// });
 
-let server = require("http")
-  .createServer(app)
-  .listen(3000);
+let server = require("http").createServer(app).listen(3000);
 
 let io = require("socket.io").listen(server);
 io.on("connection", function(socket) {
@@ -161,7 +174,7 @@ function newSchedule() {
 
     console.log("hellow date: ", global.date)
     global.repeatCheck = 1;
-    global.dateCheck = 0;
+    global.dateCheck = 0; 
     
     console.log("if");
     console.log("hellow date: ", global.date)

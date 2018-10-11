@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <style>
+            input[type=text], select {
+                width: 50%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                margin-top:5%;
+                margin-left:25%;
+            }
+            .title{
+                color:white;
+                font-size:45px;
+                text-align:center;
+                margin-top: 150px;
+                font-family: "Helvetica Neue",sans-serif;
+                }
+                
+            .submit {
+                width: 20%;
+                background-color: #4CAF50;
+                color: white;
+                font-size: 20px;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-left:40%;
+            }
+
+            .submit:hover {
+                background-color: #45a049;
+            }
+        </style>
+    </head>
+    <body bgcolor = #181818>
+        <div class="title">Enter Password</div>
+        <input type="text" id="pword"><br>
+        <button class='submit' id='submit'>Submit</button>
+        
+    </body >
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io("http://localhost:3000");
+        document.getElementById('submit').addEventListener('click', function(){
+            let http = new XMLHttpRequest();
+            http.open('POST', '/login', true);
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            http.addEventListener('load', function(){
+                if (this.status == 403) {
+                    window.alert("Incorrect login");
+                } else if (this.status == 200) {
+                    window.location.replace("/");
+                }
+            });
+            let body = document.getElementById("pword").value;
+            body = "password=" + body;
+            http.send(body);
+         });
+    
+    
+    </script>
+</html>
