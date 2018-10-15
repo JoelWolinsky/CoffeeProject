@@ -12,11 +12,10 @@ const SQL_OPT = {
 
 const express = require("express");
 let app = express();
-app.use(express.static("client"));
 
 app.use(bodyP.urlencoded({ extended: true }));
 app.use(cookieP("VfgJL4eJmW1U8XyJ5Gkm"));
-
+app.use(express.static("client"));
 app.get("/", function(req, res) {
   console.log(12323123);
   if ("logged" in req.signedCookies) {
@@ -28,7 +27,7 @@ app.get("/", function(req, res) {
 
 app.post("/login", function(req, res) {
   console.log(req.body);
-  if (req.body.password == "thepassword123") {
+  if (req.body.password == "ppe") {
     res.cookie("logged", "true", {signed: true, maxAge:60000});
     res.send("success");
   } else {
@@ -42,6 +41,11 @@ app.post("/username", function(req, res) {
   console.log(req.body);
   res.cookie("name", name, { maxAge: 6000000});
   res.sendFile(__dirname + "/client/Brew.html");
+});
+app.get("/secure/*", function(req, res) {
+  if ("login" in req.signedCookies) {
+    res.sendFile(__dirname + "/secure" + req.path.split("/")[1] + ".html" );
+  }
 });
 app.get("*", function(req, res) {
   res.status(404);
