@@ -16,7 +16,7 @@ let app = express();
 app.use(bodyP.urlencoded({ extended: true }));
 app.use(cookieP("VfgJL4eJmW1U8XyJ5Gkm"));
 app.use(express.static("client"));
-app.get("/", function(req, res) {
+app.get("/", function(req, res) {//app to get listens to the page
   console.log(12323123);
   if ("logged" in req.signedCookies) {
     res.sendFile(__dirname + "/client/home.html");
@@ -25,13 +25,13 @@ app.get("/", function(req, res) {
   }
 });
 
-app.post("/login", function(req, res) {
+app.post("/login", function(req, res) {// gives post requests
   console.log(req.body);
   if (req.body.password == "ppe") {
     res.cookie("logged", "true", {signed: true, maxAge:60000});
     res.send("success");
   } else {
-    res.status(403);
+    res.status(403); //sends error
     res.send();
   }
 });
@@ -58,25 +58,6 @@ let server = require("http").createServer(app).listen(3000);
 let io = require("socket.io").listen(server);
 io.on("connection", function(socket) {
   console.log("a client has connected");
-  // socket.on('joel', function() {
-  //     user = 'joel'
-  //     console.log("joel received")
-  //     clicked(this);
-
-  // });
-
-  // socket.on('mum', function() {
-  //     user = 'mum'
-  //     console.log("mum received")
-  //     clicked(this);
-  // });
-
-  // socket.on('dad', function() {
-  //     user = 'dad'
-  //     console.log("dad received")
-  //     clicked(this);pytho
-  // });
-
   socket.on("history_data_request", historyDataRequest);
   socket.on("motor_request", runMotors);
   socket.on("scheduleData", weekCheck);
@@ -125,14 +106,18 @@ function historyDataRequest(username) {
 }
 
 function runMotors() {
-  console.log("running runMotors");
+  //console.log("running runMotors");
   const spawn = require("child_process").spawn;
   const pythonProcess = spawn("python", ["motortest.py", "start"]);
 }
 
+
+
+
+//shedule
 function weekCheck(data) {
   global.data = data;
-  //console.log(data)
+  console.log("lesgoo",data)
   if (Array.isArray(data["date"]) === true) {
     var days = data["date"];
 
@@ -152,74 +137,84 @@ function weekCheck(data) {
         daysUntil += 7;
       }
       d.setDate(d.getDate() + daysUntil);
-      console.log("new date " + d.toLocaleString());
+      //console.log("new date " + d.toLocaleString());
       global.date = d.toLocaleString().split(" ")[0];
       global.dataCheck = 1;
-      console.log(date);
+      //console.log(date);
+      //console.log('ns')
       newSchedule();
     }
   } else {
+    console.log('elseboi')
     newSchedule();
   }
 }
 
-var repeatCheck;
+var repeatCheck, username, type, time;
+
 
 function newSchedule() {
-  var username = data["name"];
-  var type = data["type"];
-  var time = data["time"];
-  var date;
+   global.username = data["name"];
+   global.type = data["type"];
+   global.time = data["time"];
+   global.date;
+   console.log("lesgo",data)
 
-  console.log(global.dataCheck == 1);
+  //console.log(global.dataCheck == 1);
 
   if (global.dataCheck == 1) {
     date = global.date;
 
-    console.log("hellow date: ", global.date)
+    console.log("hello date:  ", global.date)
     global.repeatCheck = 1;
     global.dateCheck = 0; 
     
-    console.log("if");
-    console.log("hellow date: ", global.date)
-
+    //console.log("if");
+    //console.log("hellow date: ", global.date)
+    db()
+    console.log('yyet')
+    
   } else {
     console.log("else date");
     global.date = data["date"];
-    console.log(global.date);
+    //console.log(global.date);
     global.repeatCheck = 0;
     var from = global.date.split("/");
     global.date = from[2] + "-" + from[0] + "-" + from[1];
-    console.log(global.date);
+    //console.log(global.date);
+    db()
   }
 
-  console.log(global.data);
-  console.log("date = " + global.date);
+}
+
+function db(){
+
+  //console.log(global.data);
+  //console.log("date = " + global.date);
   let con = mysql.createConnection(SQL_OPT);
   con.connect(function(err) {
     if (err) throw err;
     //Select all customers and return the result object:
-    con.query("SELECT userID FROM users WHERE name = ?", [username], function(
+    con.query("SELECT userID FROM users WHERE name = ?", [global.username], function(
       err,
       result,
       fields
     ) {
       let id = result[0].userID;
-      console.log(id);
-
+      //console.log(id);
+      console.log('db1s')
       con.query(
-        "INSERT INTO schedule (userID,time,date) VALUES (?,?,?)",
-        [id, time, global.date],
+        "INSERT INTO schedule (userID,time,date) VALUES (?,?,?)",[id, global.time, global.date],
         function(err, result, fields) {
           if (err) throw err;
           console.log("db done");
           con.end();
         }
       );
+      
     });
   });
 }
-
 function repeatWeek() {
   var d = new Date();
   console.log("Today is: " + d.toLocaleString());

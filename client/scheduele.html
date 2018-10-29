@@ -220,7 +220,7 @@
     </style>
 
     <body bgcolor = #181818>
-    
+        <a href="#" onClick="alert('Thanks for the click')">Click me</a>
         <div>
             <a href='http://localhost:3000'><img src="LavazzaLogo.png"   alt="logo" style="height:75px; margin-left:30px; margin-bottom:-30px"></a>
             <a href='Brew.html' style='text-decoration:none'><div class="home" style='display: inline-block;padding:20px;'>Home</div></a>
@@ -470,7 +470,7 @@
                         userDays.push(checked[i].id);
                     };
                 console.log(userDays)
-                alert('Are you sure you want to schedule a '+selectedType+ ' coffee for '+userTime+' on these days: '+userDays)
+                confirm('Are you sure you want to schedule a '+selectedType+ ' coffee for '+userTime+' on these days: '+userDays)
                 var dataToSend = {'name':username,'type':selectedType,'time':userTime,'date':userDays}
                 console.log(dataToSend)
             }
