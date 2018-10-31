@@ -165,7 +165,7 @@ function newSchedule() {
   global.type = data["type"];
   global.time = data["time"];
   global.date;
-  console.log("lesgo",data)
+  //console.log("lesgo",data)
 
   //console.log(global.dataCheck == 1);
     console.log("else date");
@@ -195,6 +195,7 @@ function db(){
   });
   console.log("db done");
   db2()
+  con.end;
 }
 
 function db2(){
@@ -203,6 +204,7 @@ function db2(){
     "INSERT INTO schedule (userID,datetime) VALUES (?,?)",[global.id, global.datetime],
     console.log('hey')
   );
+  con.end;
 }
 
 
