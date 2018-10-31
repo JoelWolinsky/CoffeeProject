@@ -461,7 +461,8 @@
             //find time
             var userTime = document.getElementById('timepicker').value;
             console.log(userTime)
-
+            
+            //var dateTime = new Date(date + ' ' + result[i]['time'])
             if(x===0){
                 //find week days    
                 var checked = $("[name=box]:checked");
@@ -471,6 +472,9 @@
                     };
                 console.log(userDays)
                 confirm('Are you sure you want to schedule a '+selectedType+ ' coffee for '+userTime+' on these days: '+userDays)
+                
+                var dateTime = new Date(date + ' ' + result[i]['time'])
+
                 var dataToSend = {'name':username,'type':selectedType,'time':userTime,'date':userDays}
                 console.log(dataToSend)
             }
@@ -479,9 +483,13 @@
                 var userDate = document.getElementById('datepicker').value;
                 console.log(userDate)
                 alert('Are you sure you want to schedule a '+selectedType+ ' coffee for '+userTime+' on '+userDate)
-                var dataToSend = {'name':username,'type':selectedType,'time':userTime,'date':userDate}
+                //var date = userDate.toISOString().slice(0,10)
+                var dateTime = new Date(userDate + ' ' + userTime)
+
+                var dataToSend = {'name':username,'type':selectedType,'dateTime':dateTime}
                 console.log(dataToSend)
             }
+
             socket.emit('scheduleData',dataToSend);
             
         }

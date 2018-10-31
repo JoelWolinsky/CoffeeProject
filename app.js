@@ -117,7 +117,7 @@ function runMotors() {
 //shedule
 function weekCheck(data) {
   global.data = data;
-  console.log("lesgoo",data)
+  
   if (Array.isArray(data["date"]) === true) {
     var days = data["date"];
 
@@ -154,11 +154,11 @@ var repeatCheck, username, type, time;
 
 
 function newSchedule() {
-   global.username = data["name"];
-   global.type = data["type"];
-   global.time = data["time"];
-   global.date;
-   console.log("lesgo",data)
+  global.username = data["name"];
+  global.type = data["type"];
+  global.time = data["time"];
+  global.date;
+  console.log("lesgo",data)
 
   //console.log(global.dataCheck == 1);
 
@@ -176,12 +176,14 @@ function newSchedule() {
     
   } else {
     console.log("else date");
-    global.date = data["date"];
+    global.datetime = data["dateTime"];
+    console.log(global.datetime)
+    global.datetime = datetime.slice(0,10) + " " + datetime.slice(11,23)
     //console.log(global.date);
     global.repeatCheck = 0;
-    var from = global.date.split("/");
-    global.date = from[2] + "-" + from[0] + "-" + from[1];
-    //console.log(global.date);
+    // var from = global.date.split("/");
+    // global.date = from[2] + "-" + from[0] + "-" + from[1];
+    // //console.log(global.date);
     db()
   }
 
@@ -200,11 +202,11 @@ function db(){
       result,
       fields
     ) {
-      let id = result[0].userID;
+      let id = result[0].userID;  
       //console.log(id);
       console.log('db1s')
       con.query(
-        "INSERT INTO schedule (userID,time,date) VALUES (?,?,?)",[id, global.time, global.date],
+        "INSERT INTO schedule (userID,datetime) VALUES (?,?)",[id, global.datetime],
         function(err, result, fields) {
           if (err) throw err;
           console.log("db done");
@@ -216,52 +218,53 @@ function db(){
   });
 }
 
-function timersCheck(){
+
+// function timersCheck(){
   
-  var today = new Date();
-  console.log(today)
+//   var today = new Date();
+//   console.log(today)
   
 
-  //console.log(now)
-  let con = mysql.createConnection(SQL_OPT);
+//   //console.log(now)
+//   let con = mysql.createConnection(SQL_OPT);
   
-  con.connect(function(err) {
-    if (err) throw err;
-    con.query("SELECT scheduleID,date,time FROM schedule", function (err, result, fields) {
-      if (err) throw err;
-      //console.log(result);
-      for (i = 0; i < result.length; i++){
-        var date = result[i]['date'].toISOString().slice(0,10)
-        console.log(result[i]['time'])
-        var Fulldate = new Date(date + ' ' + result[i]['time'])
+//   con.connect(function(err) {
+//     if (err) throw err;
+//     con.query("SELECT scheduleID,date,time FROM schedule", function (err, result, fields) {
+//       if (err) throw err;
+//       //console.log(result);
+//       // for (i = 0; i < result.length; i++){
+//       //   //var date = result[i]['date'].toISOString().slice(0,10)
+//       //   //console.log(result[i]['time'])
+//       //   //var Fulldate = new Date(date + ' ' + result[i]['time'])
         
-        console.log("1    ",Fulldate)
-        console.log("2    ",today)
-        //console.log(result[i]['time'])
-        //console.log(result[i]['time'].substring(0,1))
-        //date.setTime(result[i]['time'])
-        //console.log("1    ",date)
+//       //   //console.log("1    ",Fulldate)
+//       //   //console.log("2    ",today)
+//       //   //console.log(result[i]['time'])
+//       //   //console.log(result[i]['time'].substring(0,1))
+//       //   //date.setTime(result[i]['time'])
+//       //   //console.log("1    ",date)
         
-        if (Fulldate >= today){
-          console.log('hello')
-        }
-        console.log("")
-      }
+//       //   // if (Fulldate >= today){
+//       //   //   console.log('hello')
+//       //   // }
+//       //   // console.log("")
+//       // }
         
 
-    });
+//     });
     
-  });
-}
+//   });
+// }
 
-timersCheck();
+// timersCheck();
 
-function repeatWeek() {
-  var d = new Date();
-  console.log("Today is: " + d.toLocaleString());
-  d.setDate(d.getDate() + 7);
-  console.log("<br>in 7 days it is: " + d.toLocaleString());
-}
+// function repeatWeek() {
+//   var d = new Date();
+//   console.log("Today is: " + d.toLocaleString());
+//   d.setDate(d.getDate() + 7);
+//   console.log("<br>in 7 days it is: " + d.toLocaleString());
+// }
 
 
 
