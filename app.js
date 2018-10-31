@@ -215,6 +215,45 @@ function db(){
     });
   });
 }
+
+function timersCheck(){
+  
+  var today = new Date();
+  console.log(today)
+  
+
+  //console.log(now)
+  let con = mysql.createConnection(SQL_OPT);
+  
+  con.connect(function(err) {
+    if (err) throw err;
+    con.query("SELECT scheduleID,date,time FROM schedule", function (err, result, fields) {
+      if (err) throw err;
+      //console.log(result);
+      for (i = 0; i < result.length; i++){
+        var date = new Date(result[i]['date'])
+        
+        console.log("1    ",date)
+        console.log("2    ",today)
+        console.log(result[i]['time'])
+        //console.log(result[i]['time'].substring(0,1))
+        date.setTime('12:00:00')
+        console.log("1    ",date)
+        
+        if (date >= today){
+          console.log('hello')
+        }
+        console.log("")
+      }
+        
+
+    });
+    
+  });
+}
+
+timersCheck();
+
 function repeatWeek() {
   var d = new Date();
   console.log("Today is: " + d.toLocaleString());
