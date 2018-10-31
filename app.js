@@ -145,6 +145,8 @@ function weekCheck(data) {
       console.log(datetime)
       //console.log(date);
       //console.log('ns')
+      console.log('ok')
+
       newSchedule();
     }
   } else {
@@ -172,11 +174,9 @@ function newSchedule() {
     global.repeatCheck = 0;
     // var from = global.date.split("/");
     // global.date = from[2] + "-" + from[0] + "-" + from[1];
-    // //console.log(global.date);
+    console.log("yeet",global.datetime);
     db()
-  }
-
-
+}
 
 function db(){
 
@@ -186,25 +186,23 @@ function db(){
   con.connect(function(err) {
     if (err) throw err;
     //Select all customers and return the result object:
-    con.query("SELECT userID FROM users WHERE name = ?", [global.username], function(
-      err,
-      result,
-      fields
-    ) {
-      let id = result[0].userID;  
+    con.query("SELECT userID FROM users WHERE name = ?", [global.username], function(err,result,fields){
+       global.id = result[0].userID;  
       //console.log(id);
       console.log('db1s')
-      con.query(
-        "INSERT INTO schedule (userID,datetime) VALUES (?,?)",[id, global.datetime],
-        function(err, result, fields) {
-          if (err) throw err;
-          console.log("db done");
-          con.end();
-        }
-      );
-      
+    
     });
   });
+  console.log("db done");
+  db2()
+}
+
+function db2(){
+  let con = mysql.createConnection(SQL_OPT);
+  con.query(
+    "INSERT INTO schedule (userID,datetime) VALUES (?,?)",[global.id, global.datetime],
+    console.log('hey')
+  );
 }
 
 
