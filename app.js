@@ -140,12 +140,17 @@ function weekCheck(data) {
       //console.log("new date " + d.toLocaleString());
       global.date = d.toLocaleString().split(" ")[0];
       global.dataCheck = 1;
+      console.log(date)
+      global.datetime = new Date(date + ' ' + data['time'])
+      console.log(datetime)
       //console.log(date);
       //console.log('ns')
       newSchedule();
     }
   } else {
     console.log('elseboi')
+    global.datetime = data["dateTime"];
+    global.datetime = datetime.slice(0,10) + " " + datetime.slice(11,23)
     newSchedule();
   }
 }
@@ -161,24 +166,8 @@ function newSchedule() {
   console.log("lesgo",data)
 
   //console.log(global.dataCheck == 1);
-
-  if (global.dataCheck == 1) {
-    date = global.date;
-
-    console.log("hello date:  ", global.date)
-    global.repeatCheck = 1;
-    global.dateCheck = 0; 
-    
-    //console.log("if");
-    //console.log("hellow date: ", global.date)
-    db()
-    console.log('yyet')
-    
-  } else {
     console.log("else date");
-    global.datetime = data["dateTime"];
     console.log(global.datetime)
-    global.datetime = datetime.slice(0,10) + " " + datetime.slice(11,23)
     //console.log(global.date);
     global.repeatCheck = 0;
     // var from = global.date.split("/");
@@ -187,7 +176,7 @@ function newSchedule() {
     db()
   }
 
-}
+
 
 function db(){
 

@@ -472,9 +472,6 @@
                     };
                 console.log(userDays)
                 confirm('Are you sure you want to schedule a '+selectedType+ ' coffee for '+userTime+' on these days: '+userDays)
-                
-                var dateTime = new Date(date + ' ' + result[i]['time'])
-
                 var dataToSend = {'name':username,'type':selectedType,'time':userTime,'date':userDays}
                 console.log(dataToSend)
             }
