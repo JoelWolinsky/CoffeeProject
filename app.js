@@ -231,16 +231,18 @@ function timersCheck(){
       if (err) throw err;
       //console.log(result);
       for (i = 0; i < result.length; i++){
-        var date = new Date(result[i]['date'])
-        
-        console.log("1    ",date)
-        console.log("2    ",today)
+        var date = result[i]['date'].toISOString().slice(0,10)
         console.log(result[i]['time'])
-        //console.log(result[i]['time'].substring(0,1))
-        date.setTime('12:00:00')
-        console.log("1    ",date)
+        var Fulldate = new Date(date + ' ' + result[i]['time'])
         
-        if (date >= today){
+        console.log("1    ",Fulldate)
+        console.log("2    ",today)
+        //console.log(result[i]['time'])
+        //console.log(result[i]['time'].substring(0,1))
+        //date.setTime(result[i]['time'])
+        //console.log("1    ",date)
+        
+        if (Fulldate >= today){
           console.log('hello')
         }
         console.log("")
