@@ -5,4 +5,4 @@ This project became more of a hardware and engineering challenge than a software
 
 I then built a companion website for the machine which ran off a server on my latop and could connect to the machine to allow you to remotely trigger it. I took inspiration from Netflix's UI for the design and the final version allowed you to schedule coffees to be made from a selection of pods. You could also see a history of all the coffees that you had made on the machine.
 
-Here's a link to me testing the machine: https://www.youtube.com/watch?v=d3FRkVdxJMQ
+Here's a link to me testing the machine: https://www.youtube.com/watch?v=ylgpc51IsaM
