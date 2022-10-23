@@ -1,5 +1,5 @@
 # About
-CoffeeProject was the project I submitted for my Computing ALevel. My idea was to automate the coffee machine I had at home and build a companion website for it so that it could make me a coffee every morning ready for when I woke up.
+CoffeeProject was the project I submitted for my Computing A Level. My idea was to automate the coffee machine I had at home and build a companion website for it so that it could make me a coffee every morning ready for when I woke up.
 
 This project became more of a hardware and engineering challenge than a software development one with automating the machine being a large problem. My solution involved me desgined many iterations of 3D model designs in CAD and then 3D printing them at home and using an Arduino and stepper motors to insert coffee pods and secure them into the machine.
 
